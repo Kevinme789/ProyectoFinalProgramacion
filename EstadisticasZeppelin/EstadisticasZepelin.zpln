@@ -1,0 +1,1075 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\n## Extraer Todo un Esquema ",
+      "user": "anonymous",
+      "dateUpdated": "2025-07-22T16:46:03-0500",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Extraer Todo un Esquema</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1753220735365_1840182031",
+      "id": "paragraph_1753220735365_1840182031",
+      "dateCreated": "2025-07-22T16:45:35-0500",
+      "dateStarted": "2025-07-22T16:46:03-0500",
+      "dateFinished": "2025-07-22T16:46:03-0500",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:571"
+    },
+    {
+      "text": "%spark\n\nval url = \"jdbc:mysql://localhost:3306/armasilicitas\"\nval props = new java.util.Properties()\nprops.setProperty(\"user\", \"root\")\nprops.setProperty(\"password\", \"05291325\")\nprops.setProperty(\"driver\", \"com.mysql.cj.jdbc.Driver\")\n\n// Cargar todas las tablas\nval Provincia = spark.read.jdbc(url, \"Provincia\", props)\nval Canton = spark.read.jdbc(url, \"Canton\", props)\nval Parroquia = spark.read.jdbc(url, \"Parroquia\", props)\nval TipoArma = spark.read.jdbc(url, \"TipoArma\", props)\nval Modalidad = spark.read.jdbc(url, \"Modalidad\", props)\nval EventoArma = spark.read.jdbc(url, \"EventoArma\", props)\nval CasoSustancia = spark.read.jdbc(url, \"CasoSustancia\", props)\nval MotivoDesaparicion = spark.read.jdbc(url, \"MotivoDesaparicion\", props)\nval EventoDesaparicion = spark.read.jdbc(url, \"EventoDesaparicion\", props)\n\n// Registrar como vistas temporales para hacer consultas SQL\nProvincia.createOrReplaceTempView(\"Provincia\")\nCanton.createOrReplaceTempView(\"Canton\")\nParroquia.createOrReplaceTempView(\"Parroquia\")\nTipoArma.createOrReplaceTempView(\"TipoArma\")\nModalidad.createOrReplaceTempView(\"Modalidad\")\nEventoArma.createOrReplaceTempView(\"EventoArma\")\nCasoSustancia.createOrReplaceTempView(\"CasoSustancia\")\nMotivoDesaparicion.createOrReplaceTempView(\"MotivoDesaparicion\")\nEventoDesaparicion.createOrReplaceTempView(\"EventoDesaparicion\")",
+      "user": "anonymous",
+      "dateUpdated": "2025-07-22T15:54:13-0500",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34murl\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = jdbc:mysql://localhost:3306/armasilicitas\n\u001b[1m\u001b[34mprops\u001b[0m: \u001b[1m\u001b[32mjava.util.Properties\u001b[0m = {user=root, password=05291325, driver=com.mysql.cj.jdbc.Driver}\n\u001b[1m\u001b[34mProvincia\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [id_provincia: int, nombre: string]\n\u001b[1m\u001b[34mCanton\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [id_canton: int, nombre: string ... 1 more field]\n\u001b[1m\u001b[34mParroquia\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [id_parroquia: int, nombre: string ... 1 more field]\n\u001b[1m\u001b[34mTipoArma\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [id_tipo_arma: int, clase_arma: string ... 3 more fields]\n\u001b[1m\u001b[34mModalidad\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [id_modalidad: int, tipo_delito: string ... 2 more f...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1753168813626_801606738",
+      "id": "paragraph_1753168813626_801606738",
+      "dateCreated": "2025-07-22T02:20:13-0500",
+      "dateStarted": "2025-07-22T15:54:13-0500",
+      "dateFinished": "2025-07-22T15:54:27-0500",
+      "status": "FINISHED",
+      "$$hashKey": "object:572"
+    },
+    {
+      "text": "%md\n## Provincias con más de 1000 armas ilícitas y más de 1000 sustancias destruidas.",
+      "user": "anonymous",
+      "dateUpdated": "2025-07-22T02:35:19-0500",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Provincias con más de 1000 armas ilícitas y más de 1000 sustancias destruidas.</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1753169701913_590350328",
+      "id": "paragraph_1753169701913_590350328",
+      "dateCreated": "2025-07-22T02:35:01-0500",
+      "dateStarted": "2025-07-22T02:35:19-0500",
+      "dateFinished": "2025-07-22T02:35:21-0500",
+      "status": "FINISHED",
+      "$$hashKey": "object:573"
+    },
+    {
+      "text": "%spark.sql\nWITH ArmasPorProvincia AS (\n    SELECT \n        c.id_provincia,\n        COUNT(DISTINCT ea.id_evento) AS armas_ilicitas\n    FROM EventoArma ea\n    JOIN Parroquia prq ON ea.id_parroquia = prq.id_parroquia\n    JOIN Canton c ON prq.id_canton = c.id_canton\n    GROUP BY c.id_provincia\n),\nSustanciasPorProvincia AS (\n    SELECT \n        id_provincia,\n        COUNT(DISTINCT id_caso) AS sustancias_destruidas\n    FROM CasoSustancia\n    GROUP BY id_provincia\n)\nSELECT \n    p.nombre AS provincia,\n    a.armas_ilicitas,\n    s.sustancias_destruidas\nFROM Provincia p\nJOIN ArmasPorProvincia a ON p.id_provincia = a.id_provincia\nJOIN SustanciasPorProvincia s ON p.id_provincia = s.id_provincia\nWHERE a.armas_ilicitas > 1000 AND s.sustancias_destruidas > 1000\nORDER BY a.armas_ilicitas DESC, s.sustancias_destruidas DESC;",
+      "user": "anonymous",
+      "dateUpdated": "2025-07-22T02:35:28-0500",
+      "progress": 33,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "provincia": "string",
+                      "armas_ilicitas": "string",
+                      "sustancias_destruidas": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "provincia",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "armas_ilicitas",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "provincia\tarmas_ilicitas\tsustancias_destruidas\nGUAYAS\t16246\t1635\nESMERALDAS\t4411\t1682\nPICHINCHA\t3751\t48730\nEL ORO\t3568\t1169\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=5",
+              "$$hashKey": "object:1027"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=6",
+              "$$hashKey": "object:1028"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=7",
+              "$$hashKey": "object:1029"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=8",
+              "$$hashKey": "object:1030"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=9",
+              "$$hashKey": "object:1031"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=12",
+              "$$hashKey": "object:1032"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=13",
+              "$$hashKey": "object:1033"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=15",
+              "$$hashKey": "object:1034"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=17",
+              "$$hashKey": "object:1035"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1753169623828_2035090823",
+      "id": "paragraph_1753169623828_2035090823",
+      "dateCreated": "2025-07-22T02:33:43-0500",
+      "dateStarted": "2025-07-22T02:34:46-0500",
+      "dateFinished": "2025-07-22T02:34:48-0500",
+      "status": "FINISHED",
+      "$$hashKey": "object:574"
+    },
+    {
+      "text": "%md\n## Modalidades delictivas más comunes en provincias con más de 10.000 desapariciones (solo si se repiten más de 10 veces)",
+      "user": "anonymous",
+      "dateUpdated": "2025-07-22T02:36:37-0500",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Modalidades delictivas más comunes en provincias con más de 10.000 desapariciones (solo si se repiten más de 10 veces)</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1753169777855_1635159903",
+      "id": "paragraph_1753169777855_1635159903",
+      "dateCreated": "2025-07-22T02:36:17-0500",
+      "dateStarted": "2025-07-22T02:36:37-0500",
+      "dateFinished": "2025-07-22T02:36:37-0500",
+      "status": "FINISHED",
+      "$$hashKey": "object:575"
+    },
+    {
+      "text": "%spark.sql\nWITH DesaparicionesPorProvincia AS (\n    SELECT \n        id_provincia,\n        COUNT(*) AS cantidad_desapariciones\n    FROM EventoDesaparicion\n    GROUP BY id_provincia\n),\nProvinciasTop AS (\n    SELECT id_provincia\n    FROM DesaparicionesPorProvincia\n    WHERE cantidad_desapariciones > 10000\n),\nModalidadesFiltradas AS (\n    SELECT \n        p.nombre AS provincia,\n        m.modalidad,\n        COUNT(*) AS cantidad\n    FROM EventoArma ea\n    JOIN Modalidad m ON ea.id_modalidad = m.id_modalidad\n    JOIN Parroquia prq ON ea.id_parroquia = prq.id_parroquia\n    JOIN Canton c ON prq.id_canton = c.id_canton\n    JOIN Provincia p ON c.id_provincia = p.id_provincia\n    WHERE \n        p.id_provincia IN (SELECT id_provincia FROM ProvinciasTop)\n        AND m.modalidad <> 'SIN_DATO'\n    GROUP BY p.nombre, m.modalidad\n)\nSELECT *\nFROM ModalidadesFiltradas\nWHERE cantidad > 10\nORDER BY cantidad DESC;\n",
+      "user": "anonymous",
+      "dateUpdated": "2025-07-22T17:25:24-0500",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "editorHide": false,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "pieChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "provincia": "string",
+                      "modalidad": "string",
+                      "cantidad": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "pieChart": {},
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "provincia",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "modalidad",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "cantidad",
+                  "index": 2,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "provincia\tmodalidad\tcantidad\nGUAYAS\tASALTO\t1932\nPICHINCHA\tASALTO\t486\nGUAYAS\tNO DETERMINADO\t384\nPICHINCHA\tNO DETERMINADO\t102\nGUAYAS\tSACA PINTAS\t70\nGUAYAS\tESTRUCHE\t38\nGUAYAS\tASALTO POR OBSTRUCCION EN LA VIA\t34\nPICHINCHA\tESTRUCHE\t31\nPICHINCHA\tSACA PINTAS\t24\nGUAYAS\tASALTO POR PASAJEROS\t23\nGUAYAS\tARRANCHADORES\t17\nPICHINCHA\tCUATREROS\t14\nGUAYAS\tCUATREROS\t11\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=18",
+              "$$hashKey": "object:1153"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=19",
+              "$$hashKey": "object:1154"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=20",
+              "$$hashKey": "object:1155"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=21",
+              "$$hashKey": "object:1156"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=22",
+              "$$hashKey": "object:1157"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=23",
+              "$$hashKey": "object:1158"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=29",
+              "$$hashKey": "object:1159"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=30",
+              "$$hashKey": "object:1160"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1753169635531_274796339",
+      "id": "paragraph_1753169635531_274796339",
+      "dateCreated": "2025-07-22T02:33:55-0500",
+      "dateStarted": "2025-07-22T02:36:44-0500",
+      "dateFinished": "2025-07-22T02:36:45-0500",
+      "status": "FINISHED",
+      "$$hashKey": "object:576"
+    },
+    {
+      "text": "%md\n## Provincias donde coincide la presencia de sustancias destruidas y armas ilícitas",
+      "user": "anonymous",
+      "dateUpdated": "2025-07-22T02:40:12-0500",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Provincias donde coincide la presencia de sustancias destruidas y armas ilícitas</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1753169906648_1377327461",
+      "id": "paragraph_1753169906648_1377327461",
+      "dateCreated": "2025-07-22T02:38:26-0500",
+      "dateStarted": "2025-07-22T02:40:12-0500",
+      "dateFinished": "2025-07-22T02:40:12-0500",
+      "status": "FINISHED",
+      "$$hashKey": "object:577"
+    },
+    {
+      "text": "%spark.sql\n-- Provincias donde coincide la presencia de sustancias destruidas y armas ilícitas\nWITH ArmasPorProvincia AS (\n    SELECT c.id_provincia, COUNT(*) AS total_armas\n    FROM EventoArma ea\n    JOIN Parroquia prq ON ea.id_parroquia = prq.id_parroquia\n    JOIN Canton c ON prq.id_canton = c.id_canton\n    GROUP BY c.id_provincia\n),\nSustanciasPorProvincia AS (\n    SELECT id_provincia, COUNT(*) AS total_sustancias\n    FROM CasoSustancia\n    GROUP BY id_provincia\n),\nCoinciden AS (\n    SELECT a.id_provincia, a.total_armas, s.total_sustancias\n    FROM ArmasPorProvincia a\n    JOIN SustanciasPorProvincia s ON a.id_provincia = s.id_provincia\n)\nSELECT p.nombre AS provincia, c.total_armas, c.total_sustancias\nFROM Coinciden c\nJOIN Provincia p ON p.id_provincia = c.id_provincia\nORDER BY c.total_armas DESC, c.total_sustancias DESC;\n",
+      "user": "anonymous",
+      "dateUpdated": "2025-07-22T15:56:55-0500",
+      "progress": 50,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "provincia": "string",
+                      "total_armas": "string",
+                      "total_sustancias": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "pieChart": {}
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "provincia",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "total_armas",
+                  "index": 1,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "total_sustancias",
+                  "index": 2,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "provincia\ttotal_armas\ttotal_sustancias\nGUAYAS\t16246\t1635\nESMERALDAS\t4411\t1682\nPICHINCHA\t3751\t48730\nEL ORO\t3568\t1169\nIMBABURA\t922\t4551\nAZUAY\t794\t5620\nCARCHI\t673\t844\nCOTOPAXI\t623\t15\nORELLANA\t559\t212\nLOJA\t447\t3711\nCHIMBORAZO\t439\t6\nTUNGURAHUA\t393\t4271\nMORONA SANTIAGO\t274\t28\nNAPO\t231\t9\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=0",
+              "$$hashKey": "object:1274"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=1",
+              "$$hashKey": "object:1275"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=2",
+              "$$hashKey": "object:1276"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=3",
+              "$$hashKey": "object:1277"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=4",
+              "$$hashKey": "object:1278"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=8",
+              "$$hashKey": "object:1279"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=9",
+              "$$hashKey": "object:1280"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1753169804786_1107912430",
+      "id": "paragraph_1753169804786_1107912430",
+      "dateCreated": "2025-07-22T02:36:44-0500",
+      "dateStarted": "2025-07-22T15:55:54-0500",
+      "dateFinished": "2025-07-22T15:55:57-0500",
+      "status": "FINISHED",
+      "$$hashKey": "object:578"
+    },
+    {
+      "text": "%md\n## Cantidad de armas ilícitas relacionadas a cantones donde hubo más de 10000 desapariciones",
+      "user": "anonymous",
+      "dateUpdated": "2025-07-22T02:40:52-0500",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Cantidad de armas ilícitas relacionadas a cantones donde hubo más de 10000 desapariciones</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1753170016925_2130311002",
+      "id": "paragraph_1753170016925_2130311002",
+      "dateCreated": "2025-07-22T02:40:16-0500",
+      "dateStarted": "2025-07-22T02:40:52-0500",
+      "dateFinished": "2025-07-22T02:40:52-0500",
+      "status": "FINISHED",
+      "$$hashKey": "object:579"
+    },
+    {
+      "text": "%spark.sql\nWITH CantonesConDesapariciones AS (\n    SELECT \n        c.id_canton,\n        COUNT(*) AS desapariciones\n    FROM EventoDesaparicion ed\n    JOIN Provincia p ON ed.id_provincia = p.id_provincia\n    JOIN Canton c ON c.id_provincia = p.id_provincia\n    GROUP BY c.id_canton\n    HAVING desapariciones > 10000\n)\nSELECT \n    c.nombre AS canton,\n    COUNT(DISTINCT ea.id_evento) AS armas_ilicitas\nFROM EventoArma ea\nJOIN Parroquia prq ON ea.id_parroquia = prq.id_parroquia\nJOIN Canton c ON prq.id_canton = c.id_canton\nWHERE c.id_canton IN (SELECT id_canton FROM CantonesConDesapariciones)\nGROUP BY c.nombre\nORDER BY armas_ilicitas DESC;",
+      "user": "anonymous",
+      "dateUpdated": "2025-07-22T02:40:58-0500",
+      "progress": 33,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "canton": "string",
+                      "armas_ilicitas": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "canton",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "armas_ilicitas",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "canton\tarmas_ilicitas\nGUAYAQUIL\t9516\nQUITO\t3144\nDURAN\t1020\nNARANJAL\t748\nDAULE\t721\nMILAGRO\t710\nSAN JACINTO DE YAGUACHI\t438\nEL EMPALME\t314\nSALITRE\t267\nBALZAR\t265\nPEDRO CARBO\t262\nEL TRIUNFO\t250\nSAMBORONDON\t231\nPLAYAS (GENERAL VILLAMIL)\t226\nSANTA LUCIA\t196\nNOBOL (VICENTE PIEDRAHITA)\t183\nBALAO\t173\nRUMIÃAHUI\t137\nALFREDO BAQUERIZO MORENO\t122\nMEJIA\t117\nSIMON BOLIVAR\t116\nNARANJITO\t110\nCAYAMBE\t95\nPUERTO QUITO\t90\nLOMAS DE SARGENTILLO\t88\nISIDRO AYORA\t77\nPALESTINA\t72\nSAN MIGUEL DE LOS BANCOS\t72\nCOLIMES\t69\nPEDRO VICENTE MALDONADO\t68\nGENERAL ANTONIO ELIZALDE\t45\nPEDRO MONCAYO\t28\nCORONEL MARCELINO MARIDUEÃA\t27\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=42",
+              "$$hashKey": "object:1390"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=43",
+              "$$hashKey": "object:1391"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=44",
+              "$$hashKey": "object:1392"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=45",
+              "$$hashKey": "object:1393"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=46",
+              "$$hashKey": "object:1394"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=47",
+              "$$hashKey": "object:1395"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=48",
+              "$$hashKey": "object:1396"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=52",
+              "$$hashKey": "object:1397"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=53",
+              "$$hashKey": "object:1398"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=54",
+              "$$hashKey": "object:1399"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1753169931176_814902427",
+      "id": "paragraph_1753169931176_814902427",
+      "dateCreated": "2025-07-22T02:38:51-0500",
+      "dateStarted": "2025-07-22T02:40:54-0500",
+      "dateFinished": "2025-07-22T02:40:55-0500",
+      "status": "FINISHED",
+      "$$hashKey": "object:580"
+    },
+    {
+      "text": "%md\n## Coordenadas de armas ilícitas y desapariciones en la misma provincia",
+      "user": "anonymous",
+      "dateUpdated": "2025-07-22T02:42:07-0500",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Coordenadas de armas ilícitas y desapariciones en la misma provincia</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1753170106542_444624168",
+      "id": "paragraph_1753170106542_444624168",
+      "dateCreated": "2025-07-22T02:41:46-0500",
+      "dateStarted": "2025-07-22T02:42:07-0500",
+      "dateFinished": "2025-07-22T02:42:07-0500",
+      "status": "FINISHED",
+      "$$hashKey": "object:581"
+    },
+    {
+      "text": "%spark.sql\nSELECT \n    p.nombre AS provincia,\n    ea.latitud AS lat_arma,\n    ea.longitud AS long_arma,\n    ed.latitud AS lat_desaparecido,\n    ed.longitud AS long_desaparecido\nFROM Provincia p\nJOIN Canton c ON c.id_provincia = p.id_provincia\nJOIN Parroquia prq ON prq.id_canton = c.id_canton\nJOIN EventoArma ea ON ea.id_parroquia = prq.id_parroquia\nJOIN EventoDesaparicion ed ON ed.id_provincia = p.id_provincia\nWHERE ea.latitud IS NOT NULL AND ea.longitud IS NOT NULL\n  AND ed.latitud IS NOT NULL AND ed.longitud IS NOT NULL;",
+      "user": "anonymous",
+      "dateUpdated": "2025-07-22T02:44:17-0500",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "provincia": "string",
+                      "lat_arma": "string",
+                      "long_arma": "string",
+                      "lat_desaparecido": "string",
+                      "long_desaparecido": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "provincia",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "lat_arma",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "provincia\tlat_arma\tlong_arma\tlat_desaparecido\tlong_desaparecido\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8831540977899599\t-78,9911279082298279\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90553888261715487\t-79,0152275562286377\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90553888261715487\t-79,0152275562286377\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91342139999999983\t-79,0309083999999871\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92346800000000018\t-79,0661010000000033\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8980779000000001\t-78,9874856999999793\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86083329999999991\t-78,9866667000000007\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,2758197\t-79,3143774999999778\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,28621387408171639\t-79,3132687887814001\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87571850000000007\t-79,0450751999999852\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89283659999999987\t-79,0078599999999938\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91067330812865066\t-79,0208698019816467\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85537529728759853\t-78,9181798696517944\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88736133520871752\t-79,024014911759096\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88603560000000003\t-78,9921100000000251\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,06112111917468965\t-79,7450351715087891\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89930900000000014\t-79,0073173000000111\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89402256481922171\t-79,0042748498951255\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,2758197\t-79,314377499999992\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91535652836958814\t-79,0440003098738089\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90012850000000011\t-79,0058964999999915\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88167895608584912\t-79,0194264242397253\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89363962815557807\t-78,9920696760084979\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88687579999999988\t-78,9988834999999909\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,2758197\t-79,3143774999999778\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89360868995926923\t-78,7767255306243896\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8993951\t-78,9754861999999775\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88847690000000012\t-78,9736800000000017\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,275961148814027\t-79,3114988165689283\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89623453445220758\t-78,9986926296997183\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92085498823951006\t-79,0456293054489265\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91303272678791547\t-79,0323213154075859\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89736829518510186\t-79,0261506677753687\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9019617000000002\t-79,0039446000000112\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91530402508375319\t-78,9995732050001607\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86353148149305925\t-78,9898627976226919\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8863850000000002\t-78,7759558999999996\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89556693333478599\t-79,0014993447746292\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90064410000000095\t-79,0102077999999892\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89552684246765635\t-79,0251644545616045\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88778173559919837\t-78,7761353761962937\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90101940000000003\t-79,0055543999999941\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89232386347632087\t-79,0056274838953527\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86318699999999993\t-78,964004999999986\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91614765611407067\t-78,999348027286203\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90722050000000021\t-79,0248689000000013\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90438872044683727\t-79,0039712170409985\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9127460281569828\t-79,0041460073655912\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88675021391150999\t-78,9759283246041264\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90087989852849093\t-78,9999574257429344\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,892529271441028\t-78,991948479292617\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,892529271441028\t-78,991948479292617\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88702179999999986\t-78,9641762999999912\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88702179999999986\t-78,9641762999999912\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88609090000000013\t-78,9921539000000053\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89051575524260596\t-78,9760233166452963\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90160829637700557\t-78,9898883923888206\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88143138621929262\t-79,0419021537682767\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,95465736276392654\t-78,9768832631146012\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88753593143402254\t-78,7779970613464684\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89430679999999985\t-78,9968344000000116\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88612409999999997\t-79,0379278999999997\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88582011043033093\t-78,9917940910003722\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,894313321371353\t-79,0046809777981593\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85991988207849435\t-79,0202164035757733\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,95514909999999986\t-78,972492299999999\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9538975210975722\t-78,9775624539672663\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90012850000000011\t-79,0058964999999915\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86318699999999993\t-78,964004999999986\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88848777107189214\t-79,002310037612915\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86969055034389031\t-78,9659579750150442\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89209169999999993\t-78,9927409000000011\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87658075226282151\t-78,9762274060724963\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8598975000000002\t-79,0201556999999895\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90177134562771233\t-78,9955085300247219\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91005599999999998\t-78,9923390999999953\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90355579999999991\t-78,9927009999999967\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,95412520000000001\t-78,9776911999999953\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91862997519575629\t-78,8485237111104595\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90012850000000011\t-79,0058964999999915\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88722484067743368\t-78,998486428291983\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90984408952311435\t-78,9957296110515017\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91677003415171265\t-78,9809298142790794\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,79606428780563254\t-78,7666867671578075\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88046198021380162\t-78,9834987372887554\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85242494523411505\t-79,0153738859225996\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87571850000000007\t-79,0450751999999994\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88425215979790428\t-78,9737488701939583\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89937803171271957\t-78,9956932322043457\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90140399999999987\t-79,0076099999999997\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8543280000000002\t-78,916404\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90294639999999982\t-79,009876399999996\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90163400000000005\t-78,976696000000004\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87571850000000007\t-79,0450751999999994\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9183102494447013\t-79,0030301213482744\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89552500000000013\t-79,0254138999999896\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90179718301788636\t-79,0027499198913574\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86660349527302616\t-79,0039166808128357\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9363281394054721\t-78,966405987739563\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88236200000000009\t-79,0589398999999986\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92346800000000018\t-79,0661010000000033\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89043057068824361\t-78,9778375625610352\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90012850000000011\t-79,0058965000000057\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91115020312479134\t-79,0265142917633057\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89697799999999983\t-79,0183394999999962\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,94017399999999984\t-78,9200289999999995\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89150300000000016\t-78,9844080000000019\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89150300000000016\t-78,9844080000000019\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90027280000000021\t-79,0345965000000064\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86604325750047018\t-78,8842610630636472\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90948180000000001\t-79,0445819999999912\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87804109999999991\t-78,9998774000000026\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,78737160000000017\t-79,1774267999999921\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89833529999999984\t-79,0127787999999924\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89918496298271355\t-79,008453036485534\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87230799999999986\t-78,9838925999999901\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89765271850181927\t-79,0316730950518576\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89716504491498794\t-79,0049117803573608\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88800889754261769\t-78,7787102968505906\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86425799999999997\t-79,007105100000004\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90307259999999978\t-79,0371708999999925\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,80508800000000003\t-78,9929410999999959\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,80508800000000003\t-78,9929410999999959\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89353870000000013\t-79,0011741000000001\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89770679999999992\t-79,0281433999999905\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86638610000000016\t-78,8854529999999983\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8901314331511494\t-78,8523799178104383\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8901314331511494\t-78,8523799178104383\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8901314331511494\t-78,8523799178104383\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89984229999999998\t-79,023061200000015\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89849699999999988\t-78,9983419999999938\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89830255302080397\t-79,0074688175964468\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89455254452241917\t-79,0013208525636657\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8962084761820277\t-79,0017888191185023\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88182449526065509\t-79,0255284631452497\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92346800000000018\t-79,0661010000000033\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,95412520000000001\t-78,9776911999999953\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89864999999999995\t-79,0246568999999965\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,28318729999999981\t-79,025412199999991\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,28318729999999981\t-79,025412199999991\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,84950819999999982\t-79,0136474999999905\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88730548534566323\t-79,0260004711639539\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,95360822737551221\t-78,9770474698364211\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88699400000000006\t-79,0343871999999976\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91909741176595805\t-79,0177756072319113\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89000391695365799\t-78,9586419699058553\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86305263485323813\t-78,9653258101463678\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8962842000000002\t-79,0334287999999958\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90245430000000004\t-79,0028904999999924\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88245492716140417\t-79,0464186295866966\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89557217377673703\t-79,0253755599587748\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8571573364056202\t-78,9885767921805382\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88303396972522696\t-78,9975182712078094\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,06289599999999984\t-79,0660519999999991\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87988154624534243\t-78,9887553214237812\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90147850000000007\t-79,0374094000000014\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8954238360730109\t-79,001162052154541\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86363149999999989\t-79,0598892999999947\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89353870000000013\t-79,0011741000000001\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,96341244650912783\t-78,9905936694083266\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91008790000000017\t-79,0349661000000054\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91123160456450725\t-79,0467731098284929\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89252399999999987\t-79,0009869000000151\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91085949999999993\t-79,0358028000000132\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89815759999999978\t-78,9874078000000139\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89543280000000003\t-79,0011585000000167\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,33653410000000017\t-79,0630931999999973\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8922968302142662\t-78,9926079599120357\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9224505999999999\t-79,0386067000000025\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86228060000000006\t-79,0673302000000007\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88434599999999985\t-78,9937204999999949\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91419521505453538\t-79,0291708503860235\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89445569999999996\t-79,0100572999999997\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89809078664505293\t-79,0111805843653912\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91565649999999987\t-78,9953330000000022\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,07696584046004373\t-79,7082047292957299\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89173599999999986\t-78,9989589999999993\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8920979\t-78,9927753999999993\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8920979\t-78,9927753999999993\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90397120486465354\t-79,01792531660017\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8990098612818902\t-78,9876838114206521\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8990098612818902\t-78,9876838114206521\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8990098612818902\t-78,9876838114206521\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89919042222927059\t-78,9943754486943703\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,97958299999999987\t-79,6848908999999992\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90012850000000011\t-79,0058964999999915\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90158249999999995\t-79,0152961000000005\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91646565465694207\t-79,0008723536204229\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91646565465694207\t-79,0008723536204229\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90007999999999999\t-79,0009316000000013\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88142598616471535\t-79,0052681351663608\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87178367045572447\t-79,066795084721349\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89724069999999978\t-79,0328202000000033\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89018173965590552\t-79,0296172752658919\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90018930000000008\t-79,005967499999997\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89328886484601933\t-78,9994652992084667\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86083329999999991\t-78,9866667000000007\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91873460000000096\t-79,0415004999999979\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92881929999999979\t-79,0457186999999948\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90012850000000011\t-79,0058964999999915\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88966478496788559\t-79,0214558629995167\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89737615513803348\t-78,9897839045185179\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,06199922903589394\t-79,7481259915030307\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90012850000000011\t-79,0058964999999915\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,2758197\t-79,314377499999992\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89174059999999988\t-79,00802809999999\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,21534011322856017\t-79,4631865627035978\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90012850000000011\t-79,0058964999999915\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90220833275675583\t-79,0034013993836055\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86685464381855537\t-78,9833026574228825\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86225544158243395\t-78,9639485479710856\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86225544158243395\t-78,9639485479710856\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86225544158243395\t-78,9639485479710856\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88702179999999986\t-78,9641762999999628\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,05958737238722556\t-79,7450880704855081\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89201455799467899\t-79,0031827509956202\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88833729999999989\t-78,9411026999999876\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91593739999999979\t-79,0230581999999799\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87433998475322028\t-79,074799288137001\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,84407757216137114\t-78,9614036679267883\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88076221600939064\t-78,9791572093963623\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90220369999999983\t-79,0136287999999922\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,83898800000000007\t-78,9410780000000045\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,83898800000000007\t-78,9410780000000045\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89900890000000011\t-79,0042988999999807\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93790299999999993\t-78,9662170000000003\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88953786068609775\t-79,0038107335567474\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,24559828885253099\t-79,2397928237915039\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88317289999999993\t-78,9936854000000039\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,05370442074308901\t-78,7922242335295095\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90745511311749327\t-79,0052964944427458\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89536675445640634\t-79,0503171539672849\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86337559571896039\t-78,9638762539672712\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89961009942572456\t-78,9855086803436279\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93811842200878992\t-78,9666514098644257\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89572699999999994\t-79,001607000000007\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86414479037264691\t-78,9711350243238712\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,79572049999999983\t-78,7674561999999696\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,98037909463626249\t-79,6872401090110998\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90079280000000006\t-78,9999998000000119\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8885105000000002\t-78,9980831999999964\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88257889999999994\t-78,9824939999999742\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8863850000000002\t-78,7759558999999996\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89341581712163665\t-79,0103539824485779\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8972679100757035\t-79,0291830897331238\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87193779999999999\t-78,9813168000000019\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88693741377585056\t-78,999016284942627\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91557859999999991\t-78,9995153999999928\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91575241617239289\t-79,0280055999755859\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88676178526796168\t-79,0094011276960373\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89312199999999997\t-78,7741740000000021\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,09582642822174714\t-79,0051436473731883\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,15920612339275886\t-79,1477739438414574\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90366819999999981\t-78,9896628000000049\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92346800000000018\t-79,0661010000000033\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89719543233399435\t-79,0079599432647228\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,05902555387738984\t-79,67223460976561\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88350939999999989\t-79,0348718999999988\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90150869999999994\t-78,9968109999999939\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93790299999999993\t-78,9662170000000003\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86083329999999991\t-78,9866667000000007\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89646869871238355\t-79,0017403463389201\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,79803875088937559\t-78,9926391653716564\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88281469999999995\t-78,9896971999999948\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,0800664854702795\t-79,7258278727531433\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,32150409999999985\t-79,6268353999999903\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88702179999999986\t-78,9641762999999912\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89379424073066227\t-78,9934492707470781\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89764799999999978\t-78,9856359999999995\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88228598897762733\t-79,0441188423584009\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86318699999999993\t-78,964004999999986\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86264771593145539\t-78,9646728700446943\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,84459007945129461\t-78,9572811126708984\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,82038324979602262\t-78,7607395648956299\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88868310028747599\t-78,994076907656563\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89543280000000003\t-79,0011585000000167\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,76954389999999995\t-78,7150254000000018\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88947638221934255\t-79,0351590514183044\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87074494537532798\t-79,0240845245368888\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89519798099920589\t-79,0055045485496521\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89566760547203161\t-79,047703742980957\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8887729000000002\t-79,0163226999999893\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88783749187621153\t-79,0103942155838013\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92316930000000008\t-79,0659600999999981\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90012850000000011\t-79,0058964999999915\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89082499999999998\t-78,9768998999999781\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90575275551390222\t-78,9966289886069717\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89874552446843925\t-79,0272116661071777\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91763720000000015\t-78,9505077999999969\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91272277532668689\t-79,0371971949934959\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,94074599999999986\t-78,8975120000000061\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86318699999999993\t-78,9640050000000002\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,27573170180112294\t-79,3138003621643293\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88702179999999986\t-78,9641762999999628\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,82026712972000659\t-79,0081490568271647\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88890673525241182\t-78,9982440770654648\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86083329999999991\t-78,9866667000000007\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85551644071313193\t-78,9623585343360901\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88778575749579414\t-79,0376105904579163\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,94018256311921888\t-78,966560322753935\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88151198371764439\t-79,008706770837307\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88129269999999993\t-79,0051684999999679\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92511174899526205\t-79,0605448186397552\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91793399999999981\t-79,0259539999999987\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89921899999999999\t-79,0074659999999938\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89921899999999999\t-79,0074659999999938\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89214591945568245\t-79,0019947104156017\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88612409999999997\t-79,0379278999999997\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92619502053087599\t-78,9760890305205976\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9081039999999998\t-79,0022670000000033\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89270799999999983\t-78,9745139999999992\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,932315\t-79,0393090000000029\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86121172251368616\t-79,0124404057860374\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8920979\t-78,9927753999999993\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88612409999999997\t-79,0379278999999997\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,97887799999999991\t-79,0779650000000061\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,16078690000000018\t-79,1548532999999992\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87571850000000007\t-79,0450751999999852\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87571850000000007\t-79,0450751999999852\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91708560000000094\t-79,0404935999999907\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,01306329252313621\t-79,034331031147758\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88301100000000021\t-78,9975132999999801\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89848939999999988\t-79,0003103999999894\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90887482774917494\t-79,061704158957582\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90887482774917494\t-79,061704158957582\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89206909946607027\t-79,035275638125313\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89760201906876835\t-79,0286369880479356\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86617481205016178\t-79,0502404421567917\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89055550031428377\t-78,9987301806259268\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,06173538914023258\t-79,7429388575255871\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90299279999999982\t-78,9967161000000146\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85219999999999985\t-79,0155938999999989\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92809169999999996\t-78,778788899999995\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90139399473645021\t-79,030851423740387\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89512489999999989\t-79,0075515999999993\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89526444836065489\t-79,0505348145961761\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90884183848232247\t-79,0420379133723827\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85154350000000001\t-79,0133597000000236\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90963290000000008\t-79,0085825999999969\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88544629999999991\t-79,0423016999999959\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88022\t-79,0231650000000059\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89873146088892986\t-78,9760029315948486\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89082499999999998\t-78,9768998999999923\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87132040000000011\t-78,9882082999999966\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,79572049999999983\t-78,7674561999999696\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89543832987050287\t-79,0011910177909726\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88728002570086062\t-79,010960797677285\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90904499999999988\t-78,9837789999999984\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,01270089312744371\t-79,0388694263099296\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88949499990453118\t-79,0088760852813721\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89552500000000013\t-79,0254138999999896\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86691159999999989\t-78,9838010999999938\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89429580000000009\t-79,0105555999999751\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88923950943083474\t-79,0355211496353149\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8962842000000002\t-79,0334288000000242\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89492100000000008\t-79,0504458999999997\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9166669999999999\t-78,8500000000000227\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88702179999999986\t-78,9641762999999628\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89482270000000019\t-79,0054592000000184\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86602982607052903\t-78,9697354727172751\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86408769999999979\t-78,9716200000000015\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88802175527088556\t-78,7763070375732468\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89818810000000004\t-78,9818448999999987\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89535463360615886\t-79,0059392472908257\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89013858115743627\t-79,0262460708618164\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89215973198015552\t-79,0008187294006348\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92288372613784331\t-79,0650415420532227\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87947515364593976\t-78,9893758168544196\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91707748127409516\t-78,99305302718642\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92946950000000017\t-79,0542757000000051\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90070533775540307\t-79,0240144300246925\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,2758197\t-79,314377499999992\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89082499999999998\t-78,9768998999999781\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92346800000000018\t-79,0661010000000033\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89773454627826244\t-79,0015612461712635\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86318699999999993\t-78,964004999999986\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92346800000000018\t-79,0661010000000033\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89534454377580497\t-78,9834380149841309\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88304426641698752\t-78,9974847435951233\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88509599999999988\t-78,998296699999969\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89208660089057012\t-78,9924609661102295\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9186466000000002\t-79,0002038999999741\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89082499999999998\t-78,9768998999999781\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90694898147470093\t-79,0335014462471008\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90694898147470093\t-79,0335014462471008\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90080187368551812\t-79,0146209343238866\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92256999999999989\t-79,0608593999999982\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85219999999999985\t-79,0155938999999989\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89492100000000008\t-79,0504458999999997\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90002219848659459\t-79,0254891113159488\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,94017399999999984\t-78,9200289999999995\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89572218570116657\t-78,9954489469528198\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90139499999999995\t-79,0309330000000045\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89138209105138477\t-79,0098304838551257\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89552500000000013\t-79,0254138999999896\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87798894942998107\t-78,9937985793147277\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92346800000000018\t-79,0661010000000033\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93839608422863385\t-79,0255218744277954\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88505005454805774\t-78,9980893873649848\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,04884296605413718\t-78,7964087861809048\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89460627009849736\t-79,0499605359503903\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89024486736921604\t-78,9977690613075083\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91980737385846245\t-79,0065257043380598\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93717501966396544\t-78,8708872143990902\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90204143863775332\t-78,967885040716169\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89501851791528342\t-79,0193500931846984\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89763539999999997\t-79,0279856999999879\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89429790873821524\t-79,0085917711257935\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89209169999999993\t-78,9927409000000011\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88900777492931482\t-78,9720588025939492\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8993951\t-78,9754861999999918\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91815753735706629\t-78,9830866048300777\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87571850000000007\t-79,0450751999999852\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88301100000000021\t-78,9975132999999801\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88631370000000009\t-79,0087894000000119\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,94479200200855828\t-79,0177598206900029\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,0091329\t-78,8159915999999612\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89844589648139062\t-79,0030124354823329\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8869524794123933\t-78,7785841608414898\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,77871184163403928\t-78,7660719927607715\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90045710000000012\t-78,9940427999999883\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90045710000000012\t-78,9940427999999883\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89326479999999986\t-79,0103561999999897\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91466320000000012\t-79,0275003999999939\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89410583543888933\t-78,7880658418945359\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89164299968066585\t-79,0164154638237051\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89108410000000005\t-79,0110155999999932\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87571850000000007\t-79,0450751999999852\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86227609999999988\t-78,9366999000000078\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91656675378224151\t-79,0285406116163358\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86543604988376233\t-78,9870965480804443\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90067429999999993\t-78,9932244999999966\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8337351098882908\t-78,9847469329833984\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,33660338091605135\t-79,0630245872955584\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93790299999999993\t-78,9662170000000003\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88179193939033018\t-79,0184569486417558\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92346800000000018\t-79,0661010000000033\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86014789999999985\t-78,9190691999999672\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90585720836330452\t-78,9964942635924672\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89492100000000008\t-79,0504458999999997\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,79815391484476494\t-78,7623353660904542\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9011313391391278\t-79,0050011853027172\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89501262074857202\t-78,9842068732611438\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90108090000000018\t-79,0046435000000002\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87878802075130302\t-78,9888325698838685\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88337719999999997\t-79,029682600000001\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88337719999999997\t-79,029682600000001\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88337719999999997\t-79,029682600000001\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88337719999999997\t-79,029682600000001\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86249039999999999\t-78,9647913000000017\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91811750139871418\t-78,9510997092285152\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90399654833239529\t-79,006031153564436\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89996082842368885\t-79,0054301642054497\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8823474\t-79,0180781000000252\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,2758197\t-79,3143774999999778\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90938210000000019\t-78,9873192000000017\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89825081273502461\t-79,0289359635914934\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91141700000000014\t-78,9941886000000295\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85976329260799478\t-79,0412342548370361\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85976329260799478\t-79,0412342548370361\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90281289999999981\t-79,0309694000000036\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90953896397474177\t-79,0001498545074696\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90953896397474177\t-79,0001498545074696\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90953896397474177\t-79,0001498545074696\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90953896397474177\t-79,0001498545074696\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,27326104686460218\t-79,3154290138767237\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8863850000000002\t-78,7759558999999854\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91585729999999987\t-79,0277773999999908\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88940429999999981\t-79,0353714000000309\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89552500000000013\t-79,0254138999999896\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91008180979981823\t-78,9837314828461103\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88167841710849304\t-78,9881326373107413\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91356169999999981\t-79,0308246000000167\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8977885981593916\t-79,0059929539101518\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88057684149040671\t-78,9845001697540283\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91250548117546071\t-78,9866593480110168\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89430679999999985\t-78,9968344000000116\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,96249860863900016\t-79,0505361550000032\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86323682761850407\t-78,9641809528459078\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89430679999999985\t-78,9968344000000116\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,82038790000000006\t-78,7607365999999729\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88167929437718984\t-78,9888481136665064\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88801601155486942\t-78,963222625954586\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88758310000000007\t-78,9791089000000284\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89326444502924529\t-78,9387381352722173\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89326444502924529\t-78,9387381352722173\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89498239711815764\t-79,0007008451995034\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90811736519702047\t-79,0266796121942434\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92377410000000015\t-79,0400584000000208\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,81352599999999997\t-79,0034709999999905\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8920392565806079\t-78,9762443544921666\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91289245922321172\t-79,068816751241684\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91130220000000017\t-79,0393771000000243\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93790299999999993\t-78,9662170000000287\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89139664311835665\t-79,0171905798792977\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9065333025908382\t-78,9908287110450829\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91511793624732629\t-79,0370700005075832\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85218499999999997\t-79,0154540000000054\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88464632898297424\t-79,0023727423444058\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89744295792130124\t-79,0215104961107784\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,09021319999999999\t-79,0079948999999999\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88884600000000002\t-79,0023561999999941\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88827697407509998\t-78,9783695497353904\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93790299999999993\t-78,9662170000000287\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,06242359340344139\t-79,7441386294067343\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,06019889140437362\t-79,7443926813043618\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,79829909999999993\t-78,655475899999999\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89264238705519716\t-78,9929866894798351\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93128089999999997\t-79,0439360000000306\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8839873777730034\t-78,9965685724067725\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88113984456133387\t-79,0026545123031383\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90320899999999993\t-79,0125631999999882\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88548369999999998\t-78,9645543999999973\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90240071081020323\t-78,9701609415834582\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,0613147498433535\t-79,7460518012711077\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8863850000000002\t-78,7759558999999996\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89127476774261671\t-78,9822801986877039\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90270399999999995\t-78,992360299999973\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89057601642487905\t-79,0088275177909622\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89082499999999998\t-78,9768998999999781\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87230203880450308\t-78,9880537709818213\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,94404939999999993\t-78,9591642999999976\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90095989775761165\t-78,9995080212402172\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89568780000000014\t-78,9882865000000152\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,79667643491753592\t-78,7668443351806786\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86318699999999993\t-78,964004999999986\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87327924939488843\t-78,9536887164371137\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88702179999999986\t-78,9641762999999628\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89163311152527713\t-78,9919410470228627\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92955839751348845\t-79,0432061966970139\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,94017399999999984\t-78,9200289999999995\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90012850000000011\t-79,0058964999999915\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88518639999999982\t-78,9983114999999998\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87218755729692754\t-78,7573811772745103\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89620736637759713\t-78,9985677668647668\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9308990419967702\t-78,7794174573020314\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,78615879999999994\t-78,6639852000000133\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,78615879999999994\t-78,6639852000000133\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8863850000000002\t-78,7759558999999854\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90270399999999995\t-78,992360299999973\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92809169999999996\t-78,778788899999995\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90566865623288617\t-79,0038736329412359\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91938072314222286\t-79,02950377731554\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,79572049999999983\t-78,767456199999998\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,09021319999999999\t-79,0079948999999715\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,76276810000000017\t-79,3926791000000094\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87084060000000019\t-78,9845207999999843\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92398399999999992\t-79,075054200000011\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89976399999999979\t-78,9963259999999963\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,0043168653384198\t-79,0216236135283907\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9166669999999999\t-78,8500000000000227\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86318699999999993\t-78,964004999999986\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,05106920000000015\t-78,7957855999999879\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8871387308108627\t-78,9677708316235965\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86325321224131457\t-78,9947676547698734\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87321113452414245\t-79,0728038549423218\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,33653410000000017\t-79,0630932000000257\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89087221823163354\t-78,9767365751159218\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,79595413531159531\t-78,9912992842636186\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8786739194805917\t-78,996321708786752\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89000597002302717\t-79,008199640475425\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,78839399999999982\t-78,9628060000000005\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89171421171196297\t-79,0008811250573331\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89711014401311928\t-79,0216054789352285\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8984656000000002\t-78,9969446000000062\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89513450000000017\t-78,9966506000000095\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88449480000000014\t-78,9623869000000127\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89484630000000021\t-79,0190619999999626\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90642692979844508\t-78,9916303177888182\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,05809102690218371\t-79,7458367414893132\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9172130581876945\t-79,0311770399353009\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,00804800000000006\t-78,8460271000000148\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89609279999999991\t-79,0016309000000092\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89609279999999991\t-79,0016309000000092\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93790299999999993\t-78,9662170000000003\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89571758148159741\t-79,0344790785041482\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86425799999999997\t-79,007105100000004\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,96184561173376526\t-79,0547164897718915\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,94017399999999984\t-78,9200289999999995\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8920979\t-78,9927753999999993\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90306130000000007\t-78,9881099999999918\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88847690000000012\t-78,9736800000000017\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90082059999999986\t-79,0102535999999986\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91608404385200792\t-79,0317953825433506\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88129269999999993\t-79,0051684999999679\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9020737302068591\t-78,9920693315452809\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88659452669290006\t-79,0026319026947021\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,80508800000000003\t-78,9929410999999959\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89735255955365956\t-79,0053462982177734\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89735255955365956\t-79,0053462982177734\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89735255955365956\t-79,0053462982177734\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,82036499999999979\t-78,7662100000000009\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91566516506202822\t-79,0289240828168005\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90320899999999993\t-79,0125632000000024\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86718910000000005\t-79,0384500999999773\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89492100000000008\t-79,0504458999999997\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89196819999999999\t-79,0360629999999986\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86321647167018467\t-78,9637904232787946\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89489958446113871\t-78,9769730710951308\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92382909999999985\t-78,9775346000000127\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89519649575702465\t-78,9896770698449018\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9254557000000001\t-79,0470945999999941\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8962842000000002\t-79,0334288000000242\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89492100000000008\t-79,0504458999999997\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88700354677066162\t-78,9890196919441223\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,15880847447844326\t-79,1460657640014915\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9224926\t-79,0383133000000271\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92346800000000018\t-79,0661010000000033\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90195807695619656\t-78,9926648944427825\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89109297543608745\t-78,9976304785041634\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,05106920000000015\t-78,7957855999999879\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9030125\t-79,0372102999999697\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89877401786505828\t-79,0050655583190746\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88819129999999991\t-78,9410768999999846\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91355370684819048\t-79,0308380126953125\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,15822989999999981\t-79,1463868000000161\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,06078293672897628\t-79,7428785006102885\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86556490158376498\t-78,7695810447272606\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85799085424290933\t-78,9874807027643868\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90147850000000007\t-79,0374094000000014\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,80508800000000003\t-78,9929410999999959\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93790299999999993\t-78,9662170000000287\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89429919999999985\t-79,0003676999999698\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8863850000000002\t-78,7759558999999854\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,81405751168580753\t-79,0035139153442287\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,81405751168580753\t-79,0035139153442287\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,29468061520315869\t-79,2380026068369716\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86997839999999993\t-78,9658326999999929\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91406913666590794\t-79,0007143925903392\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90714980000000001\t-79,0304476000000022\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89483710365562841\t-78,9966464383524567\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88518639999999982\t-78,9983114999999998\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90366068161790958\t-78,9896079482121536\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9123329\t-78,9227382999999918\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89804839999999997\t-79,0041154000000034\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89008867296010763\t-78,9950736179190471\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88612409999999997\t-79,0379278999999997\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8871800664855698\t-78,9892953990101887\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89583493340071652\t-79,0029751366899973\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87185949292037668\t-78,9811795034802344\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8869940999999999\t-78,961348600000008\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90113049999999983\t-79,0155051000000412\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90012850000000011\t-79,0058964999999915\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86412900000000015\t-78,9683930000000061\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88218880355376861\t-79,003711324185133\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93807301880226568\t-78,9669659616807849\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87838581894654677\t-79,0007988350738515\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89217529999999989\t-79,0029567999999927\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8974369000000002\t-79,0268348000000032\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90203079999999991\t-79,0202725999999984\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89864391224542262\t-78,9826259803566018\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8889775000000002\t-78,9971984999999677\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8954213000000002\t-79,028704399999981\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8838876\t-79,016566599999976\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90265690000000021\t-79,0024864000000093\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87321360000000015\t-79,0728027999999767\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8632521999999998\t-78,9813118999999801\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90858609197499174\t-79,0416720468065819\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8863850000000002\t-78,7759558999999996\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92755794670648228\t-78,7767347799184705\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89559567703985055\t-79,0007874774038328\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90182030190029172\t-78,9723888474194951\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92346800000000018\t-79,0661010000000033\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89636848176203987\t-79,0253198644243895\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92100589999999993\t-78,9949697999999785\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88231720000000013\t-79,0030501999999615\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,97943434983370015\t-79,5310678679550023\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,78467707587428182\t-78,9583218150073662\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,79572049999999983\t-78,767456199999998\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90052520000000014\t-79,0002524000000221\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90012850000000011\t-79,0058964999999915\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89086253009536165\t-78,9817934962746904\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89545517274652564\t-79,0004936434471006\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91164213986986731\t-79,0112376812828643\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85146365255204737\t-79,0157195440000351\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8832018141605853\t-79,0396779030561447\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,15764890758374062\t-79,2520669597663527\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88129269999999993\t-79,0051684999999679\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8953697000642391\t-79,0032957286838382\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8953697000642391\t-79,0032957286838382\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89542900000000003\t-79,0255860000000041\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89374855301488365\t-78,9995360877662449\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89374855301488365\t-78,9995360877662449\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88509599999999988\t-78,998296699999969\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9224926\t-79,0383133000000271\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88691758380392427\t-78,9866784974866505\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88337719999999997\t-79,029682600000001\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89629959999999986\t-79,0027984000000174\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,03195900000000007\t-78,9317399999999907\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86290358803574829\t-79,0074909268962529\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8449466477324834\t-79,0257546533729567\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8449466477324834\t-79,0257546533729567\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89209169999999993\t-78,9927409000000011\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92346800000000018\t-79,0661010000000033\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,06021496071826515\t-79,7466856895258047\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90442139999999993\t-79,0109238000000005\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86366116236674184\t-78,963574138744832\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88428629999999986\t-79,0060234999999693\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8863850000000002\t-78,7759558999999854\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92972621856565008\t-78,8983304987419274\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90100562086625979\t-79,0224957948440334\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8692760816577132\t-79,0145333196463753\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92348579999999991\t-79,0664034000000129\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86248000000000014\t-78,9640579999999943\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85219999999999985\t-79,0155938999999989\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90269318868765103\t-79,0310465958127111\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90012850000000011\t-79,0058965000000057\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8993951\t-78,9754861999999775\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89154361650236424\t-78,9932821700515433\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89118800000000009\t-78,9778623999999922\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88319519999999985\t-79,0396440999999754\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88737336628077346\t-78,9642919896728586\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91359320860333826\t-78,9946606312828408\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89211765160691492\t-78,9927060312827507\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8910543999999998\t-78,9977779999999967\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89092041344769202\t-79,0058362090064747\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89603033711771518\t-78,9929990244123132\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89485487048329437\t-79,0089303472432221\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88373724192953285\t-78,7787794321775436\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,15822989999999981\t-79,1463868000000019\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89136511652373107\t-78,9765649137389687\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89271110000000009\t-79,0000608\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89829733149723712\t-79,0038147568702698\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89129799999999992\t-79,0142852000000175\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92556100000000008\t-79,0749090000000052\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,1591619999999998\t-79,1477579999999961\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88744639999999997\t-78,9963293999999792\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89269350000000003\t-78,9591331999999966\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90142899999999981\t-79,0383001000000007\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86563999999999997\t-78,9787589999999966\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93790299999999993\t-78,9662170000000003\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9107933564439139\t-79,0341580108520816\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89477400018294029\t-79,0003091348390285\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89197412239566232\t-79,0035249447877845\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87321360000000015\t-79,0728027999999767\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88213579999999991\t-78,9826203000000078\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92779784019794498\t-78,7783670507873808\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,2758197\t-79,3143774999999778\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88694206398401265\t-78,7756177098564194\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92864160000000018\t-79,0416781000000128\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88813728221331267\t-79,0062581740661471\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89072032998503703\t-78,9771871862304238\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,14340049999999982\t-79,2551084000000401\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93591809922213498\t-78,9678048677368452\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,80413447675128147\t-78,6568429005737357\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89674750000000003\t-78,9965606000000093\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9013945169598907\t-78,9863233004599579\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9217942888558297\t-79,0451474957008031\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86660080000000006\t-78,9417813000000024\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88971254179683346\t-79,0801740540505875\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,2758197\t-79,3143774999999778\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87971134868639922\t-79,003251014819341\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93743738188556325\t-78,8989018865580647\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87953799338936145\t-78,9933776991638297\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,16063983813723981\t-79,1499234697546967\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87321113452414245\t-79,0728038549423218\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86901775522155766\t-78,9828205297488353\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93790299999999993\t-78,9662170000000287\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89162697198850527\t-79,0012573845895076\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89162697198850527\t-79,0012573845895076\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8224623000000002\t-79,1403635000000065\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,81967940000000006\t-78,9684177000000034\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,1926420000000002\t-78,9540999999999968\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89764260002412088\t-79,0279776533730001\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8970889999999998\t-79,0287150000000054\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,99289300000000003\t-79,0820760000000007\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89284799999999986\t-79,0021449999999987\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8974369000000002\t-79,0268348000000032\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88885810000000021\t-79,0037236000000007\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92579199999999995\t-79,0238499999999959\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91206299999999985\t-79,0079080000000005\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88389806458660036\t-79,0296301119084745\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91062970719926328\t-78,986256924660438\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88734586367470936\t-78,9958097533730097\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,2758197\t-79,3143774999999778\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89719340888119969\t-78,9788007582664022\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89044041581047351\t-78,7911746114616562\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89081044196517878\t-78,7816046429221615\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89506629999999987\t-79,0075653000000102\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,95514843878057842\t-78,9724946022033691\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92325109999999988\t-79,0660477000000128\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,98084019842085635\t-79,6854437858033862\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85241029655410516\t-79,0152076619018544\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88702179999999986\t-78,9641762999999912\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89430679999999985\t-78,9968344000000116\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89663389999999987\t-78,9863258999999971\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89663389999999987\t-78,9863258999999971\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90033979218709215\t-79,0104626098564609\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,14398299999999997\t-79,2555210000000017\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,80508800000000003\t-78,9929410999999959\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89084846224099667\t-78,9949285984039307\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89178762050422478\t-78,9947389597425627\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89181260000000018\t-79,0162894000000051\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91585729999999987\t-79,0277773999999908\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9159183999999998\t-79,0229620000000068\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89123605042817822\t-78,9970904588699341\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88569589999999998\t-79,0486394999999789\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88673536070206449\t-78,9643961946429158\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89761045466793821\t-79,0288949688560933\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91218452302849684\t-79,0340304000694687\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,09282598462039271\t-79,01104816037207\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,18580058902827057\t-78,9529004855742187\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91602870000000003\t-79,0411333000000127\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88213579999999991\t-78,9826203000000078\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86358520662155724\t-79,0074052478851172\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91687728584872774\t-78,8498712539673079\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89578639999999998\t-79,0517125999999735\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8785185000000002\t-78,9932317999999896\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89369573640415911\t-79,0001303966186583\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9083126851054999\t-78,9353396523315496\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8920979\t-78,9927754000000277\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89420061992438393\t-78,9775389638907086\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,76931872253527755\t-78,7137150016052374\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90094384415797579\t-79,004587603138873\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,2758197\t-79,3143774999999778\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89198177008870561\t-79,0110753008395363\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89927404495303387\t-79,0239710601188676\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,05113336201798857\t-78,7960052918334668\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88214195704474685\t-79,0221112533729411\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90146848958317705\t-79,0023678132436089\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91587615865222505\t-79,0024731410152299\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9266130469317817\t-78,7778949820007171\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86801270595633806\t-78,9912712736106641\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91167331789809092\t-78,9864884007331511\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88798619999999984\t-79,0230364999999892\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86410920000000013\t-78,9715711999999712\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86410920000000013\t-78,9715711999999712\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90276291750657078\t-79,0007348601188824\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86337559571896039\t-78,9638762539672712\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,00804907222348783\t-78,8460136889549403\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86341560000000017\t-78,9945687000000021\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,21996210000000005\t-79,4700933999999961\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9336401356173627\t-78,9699268977661291\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86318699999999993\t-78,964004999999986\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88301100000000021\t-78,9975132999999801\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89121860000000019\t-78,7780824999999965\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87132040000000011\t-78,9882082999999966\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,79536718548663377\t-78,766793577380227\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89898418599830432\t-79,0001518601188195\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,00804800000000006\t-78,8460271000000148\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,27453426208693132\t-79,3149912357330322\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91196789053418037\t-79,0356016159057617\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92195910000000003\t-78,9936175999999932\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90079280000000006\t-78,9999997999999977\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87571850000000007\t-79,0450751999999852\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87710020398490762\t-79,0715306742765165\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8962432785121428\t-78,9854185530350605\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89659139299001467\t-79,0056984406837728\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91531539999999989\t-79,019476300000008\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8863850000000002\t-78,7759558999999996\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8863850000000002\t-78,7759558999999996\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86318699999999993\t-78,964004999999986\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90772804923984207\t-79,0599301483230761\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90000929999999979\t-79,0044950999999998\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86645589021784364\t-78,9689117074340174\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92938020000000021\t-79,054347899999982\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86106105811832379\t-78,9661078518676618\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87132040000000011\t-78,9882082999999966\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90038954211255273\t-79,0064424871025039\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89382961168405872\t-78,7800955128974465\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9649101392674253\t-78,814469368864593\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9649101392674253\t-78,814469368864593\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92100589999999993\t-78,9949697999999785\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92100589999999993\t-78,9949697999999785\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8635593657795404\t-78,9639620846557477\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92348579999999991\t-79,0664034000000129\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,05106920000000015\t-78,7957856000000021\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,77803820000000012\t-78,7622734999999921\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88115197885343299\t-78,9996519807043711\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89506629999999987\t-79,0075653000000102\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8630157003354193\t-78,963028990239934\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89710196788706043\t-79,0271576243204095\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89550955718633762\t-79,0254306793212891\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89030402286698385\t-79,0177920711639104\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90000929999999979\t-79,0044950999999855\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89151699999999989\t-78,7760443999999893\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91033132417623763\t-79,0243674573629278\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90702712415054432\t-79,0404930250715552\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8927505\t-79,0082148000000188\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88258132344437223\t-79,0590477637321669\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8871030000000002\t-78,9928709999999938\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89429896430978717\t-78,9732216146009023\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89209169999999993\t-78,9927409000000011\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86536981112316758\t-78,9875545072013665\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8734731379946159\t-79,0001839030446718\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,94308067511265214\t-78,9563216435512913\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,77686194640007278\t-78,7586600463426407\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89493800950444635\t-78,9651785385402434\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88120408216225288\t-79,016051886444103\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93711238697288568\t-78,9662242922834707\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88192710618226888\t-79,0034090712801458\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,76599439999999985\t-79,3976002999999935\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92577457767495153\t-79,0413754842345497\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9049973300773777\t-79,0326865791679438\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89552500000000013\t-79,0254138999999896\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90137370000000017\t-79,0308974999999947\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86330219520714468\t-78,9641337460327293\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90073770000000009\t-79,0001001999999914\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92114734649429897\t-79,0371814077956856\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93790299999999993\t-78,9662170000000003\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89242510000000008\t-79,0150605000000041\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88129269999999993\t-79,0051684999999679\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8863850000000002\t-78,7759558999999854\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90264509999999998\t-78,996407099999999\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90380970000000005\t-78,9810133999999948\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89242510000000008\t-79,0150605000000041\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9172111043982456\t-78,9948332123458385\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89845036046400617\t-79,0365645601189044\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,05169047048720721\t-78,7950611542602246\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88279120000000022\t-78,9969674999999825\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8953790771290695\t-79,0504029846557614\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91206869999999984\t-78,9857346999999663\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91120480675595106\t-78,9860089362657618\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89240216268519879\t-79,0053033828735352\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89492100000000008\t-79,0504458999999997\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,9031435000000001\t-79,0125896000000125\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88319519999999985\t-79,0396440999999754\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88129269999999993\t-79,0051684999999679\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90386476553799522\t-79,0069050333246423\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90262999999999982\t-79,0265310000000056\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,03195900000000007\t-78,9317399999999907\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85219999999999985\t-79,0155938999999989\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88121734708570321\t-78,9879382254002849\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89209169999999993\t-78,9927409000000011\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89113181180481993\t-78,7789878398507426\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,902935123989141\t-79,0376991033554077\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92174325462595208\t-79,0654180336180161\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89132708759115653\t-79,0007227566093206\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91082741270711898\t-78,993593055364272\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89259264023095586\t-78,993073125200624\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88226906608247502\t-78,9886023919417539\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88279651085416511\t-78,9988886856514227\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8947487999999999\t-79,0117625000000317\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89120544917612987\t-79,0047190378951427\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86718910000000005\t-79,0384500999999773\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,0322396844125965\t-78,9316251280510528\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92264589509395956\t-79,0657832944325492\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92242390707354405\t-79,0480214171111584\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92242390707354405\t-79,0480214171111584\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,79572049999999983\t-78,7674561999999696\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88458903295954272\t-79,0056372059761429\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,78900104456909892\t-78,9978739582323897\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88129269999999993\t-79,0051684999999679\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88070850554685087\t-79,0049265325069427\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87276884227733076\t-79,074179061349696\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,93790299999999993\t-78,9662170000000287\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,05027894991049786\t-78,7948143910308545\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89108240000000016\t-78,9960985999999821\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87613623851363753\t-78,9829134810760394\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89990879999999995\t-79,0075236000000132\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,0604537893837982\t-79,7466838329596612\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88631010000000021\t-78,7789767000000012\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,79810189660574515\t-78,7657016005639434\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89326479999999986\t-79,0103561999999897\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89430679999999985\t-78,9968344000000116\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88112122296966033\t-78,9877463992125968\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89611437036210795\t-78,9880897529979507\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,06015269622073882\t-79,7363165093447606\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88798619999999984\t-79,0230365000000035\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89915570000000011\t-79,0088885000000118\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,10000000000000009\t-79,1000000000000227\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8934871788955987\t-78,999131522684479\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88901885386664103\t-78,7813397719020259\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88865999999999978\t-78,9892373000000134\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90355290617480843\t-79,0067023419152292\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91635425861950859\t-79,0275722743591018\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89118800000000009\t-78,9778623999999922\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,33653410000000017\t-79,0630932000000257\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,0292457296531814\t-78,9238864920043852\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89227394171255225\t-79,0083365859138098\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88576264869319443\t-78,9684529084843234\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88129269999999993\t-79,0051684999999679\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89082499999999998\t-78,9768998999999781\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90265690000000021\t-79,0024864000000093\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92809169999999996\t-78,778788899999995\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89552500000000013\t-79,0254138999999896\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,05986646589559319\t-79,7481124431024\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8925167916499559\t-78,993671626528112\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88478959999999995\t-78,9620269000000121\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,91299295630414035\t-79,0012743473926093\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,8920792999999998\t-79,0069889999999759\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89228429582954494\t-78,9927935600280762\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,84554844303072629\t-78,9619273035359583\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,85900073563605472\t-78,9680862240493298\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,90540025402912283\t-79,0037465133773367\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89717209536749332\t-78,9988009082503595\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89740390000000003\t-79,0044834000000264\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,88512749999999984\t-78,998341900000014\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89222233043466304\t-78,9762215909850624\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,94110402805144533\t-78,9200573430023269\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,03195900000000007\t-78,9317400000000049\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89143629157733972\t-78,978015285913898\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,27424077588432727\t-79,3149053631599372\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86786370000000002\t-78,9906118000000106\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,89193069518911283\t-78,9928042888641357\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92346800000000018\t-79,0661010000000033\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,87320339999999996\t-79,07272439999997\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-3,31682429999999995\t-79,1537012999999661\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,92796892902676786\t-79,0439748018980026\nAZUAY\t-2.72997704933703789\t-78.639062481640309\t-2,86021679405415385\t-78,9803096232747635\n"
+          },
+          {
+            "type": "HTML",
+            "data": "<div class=\"result-alert alert-warning\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button><strong>Output is truncated</strong> to 1000 rows. Learn more about <strong>zeppelin.spark.maxResult</strong></div>\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=65",
+              "$$hashKey": "object:1521"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=66",
+              "$$hashKey": "object:1522"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=67",
+              "$$hashKey": "object:1523"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=68",
+              "$$hashKey": "object:1524"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=69",
+              "$$hashKey": "object:1525"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=71",
+              "$$hashKey": "object:1526"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=73",
+              "$$hashKey": "object:1527"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=74",
+              "$$hashKey": "object:1528"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1753170074130_257778797",
+      "id": "paragraph_1753170074130_257778797",
+      "dateCreated": "2025-07-22T02:41:14-0500",
+      "dateStarted": "2025-07-22T02:42:56-0500",
+      "dateFinished": "2025-07-22T02:42:57-0500",
+      "status": "FINISHED",
+      "$$hashKey": "object:582"
+    }
+  ],
+  "name": "SQL",
+  "id": "2KZ7PJ3Q2",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/SQL"
+}
